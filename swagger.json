@@ -1,0 +1,76 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0", 
+      "title": "Movieme API's",
+      "description": "Movieme api documentation",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:5001",
+    "basePath": "/api/v1",
+    "tags": [
+      {
+        "name": "Movies",
+        "description": "API for movies in the system"
+      }
+    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+			"paths": {
+				"/movies": {
+					"get": {
+						"tags": ["Movies"],
+						"summary": "Get list of all movies",
+						"parameters": [
+							{
+							  "name": "Authorization",
+							  "in": "header",
+							  "description": "JWT access token",
+							  "required": true,
+							  "type": "string"
+							}
+						],
+						"responses": {
+							"200": {
+								"description": "OK",
+								"schema": {
+									"$ref": "#/definitions/Movie"
+								}
+							}
+						}
+					},
+					"security": [
+						{
+							"bearer_auth": []
+						}
+					]
+				}
+			},
+			"definitions": {
+				"Movie": {
+					"properties": {
+						"title": {
+							"type": "string"
+						},
+						"coverUrl": {
+							"type": "string"
+						}
+					}
+				},
+				"User": {
+					"required": ["username", "password"],
+					"properties": {
+						"username": {
+							"type": "string"
+						},
+						"password": {
+							"type": "string"
+						}
+					}
+				}
+			}
+  }
